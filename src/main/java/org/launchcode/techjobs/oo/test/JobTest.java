@@ -55,5 +55,59 @@ public class JobTest {
         assertFalse(job1.equals(job2));
     }
 
+    @Test
+    public void testToStringStartsAndEndsWithNewLine(){
+        Job job = new Job("Product tester",new Employer("ACME"),
+                new Location("Desert"), new PositionType("Quality control"),
+                new CoreCompetency("Persistence"));
+
+        String output = job.toString();
+        assertEquals(output.charAt(0), '\n');
+        assertEquals(output.charAt(output.length()-1), '\n');
+    }
+
+    @Test
+    public void testToStringContainsCorrectLabelsAndData(){
+        Job job = new Job("Product tester",new Employer("ACME"),
+                new Location("Desert"), new PositionType("Quality control"),
+                new CoreCompetency("Persistence"));
+
+        String output = job.toString();
+        int id = job.getId();
+        String expectedOutput = "\nID: " + id +
+                "\nName: " + "Product tester"  +
+                "\nEmployer: " + "ACME" +
+                "\nLocation: " + "Desert" +
+                "\nPosition Type: " + "Quality control" +
+                "\nCore Competency: " + "Persistence" + "\n";
+
+        assertEquals(output, expectedOutput);
+
+//        assertTrue(output.contains("ID"));
+//        assertTrue(output.contains("Name"));
+//        assertTrue(output.contains("Employer"));
+//        assertTrue(output.contains("Location"));
+//        assertTrue(output.contains("Position Type"));
+//        assertTrue(output.contains("Core Competency"));
+    }
+
+    @Test
+    public void testToStringHandlesEmptyField(){
+        Job job = new Job("Web Developer",new Employer(""), new Location("STL"),
+                new PositionType(""), new CoreCompetency("Java"));
+
+        String output = job.toString();
+        int id = job.getId();
+        String expectedOutput = "\nID: " + id +
+                "\nName: " + "Web Developer"  +
+                "\nEmployer: " + "Data not available" +
+                "\nLocation: " + "STL" +
+                "\nPosition Type: " + "Data not available" +
+                "\nCore Competency: " + "Java" + "\n";
+
+        assertEquals(output, expectedOutput);
+    }
+
+
 
 }

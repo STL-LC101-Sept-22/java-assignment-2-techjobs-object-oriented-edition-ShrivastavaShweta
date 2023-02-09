@@ -95,4 +95,29 @@ public class Job {
     public int getId() {
         return id;
     }
+
+    @Override
+    public String toString() {
+        if (name.equals(null) ||
+                employer == null ||
+                location == null ||
+                positionType == null ||
+                coreCompetency == null) {
+            return "OOPS! This job does not seem to exist.";
+        } else {
+            String aName = name == null ? "Data not available" : name.toString();
+            String employerValue = employer.getValue() == "" ? "Data not available": employer.toString();
+            String locationValue = location.getValue() == "" ? "Data not available": location.toString();
+            String positionTypeValue = positionType.getValue() == "" ? "Data not available": positionType.toString();
+            String coreCompetencyValue = coreCompetency.getValue() == "" ? "Data not available": coreCompetency.toString();
+        return "\nID: " + id +
+                "\nName: " + aName  +
+                "\nEmployer: " + employerValue +
+                "\nLocation: " + locationValue +
+                "\nPosition Type: " + positionTypeValue +
+                "\nCore Competency: " + coreCompetencyValue + "\n";
+        }
+
+    }
+
 }
